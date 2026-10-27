@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Dashboard | ERP Engenharia
+{% endblock %}
+
+{% block page_title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-lg-3 col-6">
+        <div class="small-box text-bg-primary">
+            <div class="inner">
+                <h3>0</h3>
+                <p>Obras em andamento</p>
+            </div>
+
+            <div class="small-box-icon">
+                <i class="fas fa-helmet-safety"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+        <div class="small-box text-bg-success">
+            <div class="inner">
+                <h3>0</h3>
+                <p>Obras concluídas</p>
+            </div>
+
+            <div class="small-box-icon">
+                <i class="fas fa-circle-check"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+        <div class="small-box text-bg-warning">
+            <div class="inner">
+                <h3>0</h3>
+                <p>Medições pendentes</p>
+            </div>
+
+            <div class="small-box-icon">
+                <i class="fas fa-ruler-combined"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+        <div class="small-box text-bg-danger">
+            <div class="inner">
+                <h3>R$ 0,00</h3>
+                <p>Custos no mês</p>
+            </div>
+
+            <div class="small-box-icon">
+                <i class="fas fa-money-bill-wave"></i>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="card">
+
+    <div class="card-header">
+        <h3 class="card-title">
+            Visão geral das obras
+        </h3>
+    </div>
+
+    <div class="card-body">
+
+        <p>
+            O ERP de Administração de Obras está funcionando.
+        </p>
+
+        <p class="text-muted mb-0">
+            Os indicadores desta página serão alimentados pelos módulos do sistema.
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}
