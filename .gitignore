@@ -5,3 +5,4 @@ __pycache__/
 *.pyd
 .env
 staticfiles/
+db.sqlite3db.sqlite3

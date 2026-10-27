@@ -1,0 +1,902 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ERP Engenharia</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    >
+
+    <style>
+        :root {
+            --primary-dark: #0b1722;
+            --secondary-dark: #132536;
+            --accent: #f0b429;
+            --accent-hover: #dba11f;
+            --light-bg: #f5f7fa;
+            --text-dark: #17212b;
+            --text-muted: #6c757d;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: var(--text-dark);
+            background: #fff;
+        }
+
+        /* NAVBAR */
+
+        .main-navbar {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            z-index: 20;
+            padding: 16px 0;
+        }
+
+        .navbar-brand {
+            color: #fff !important;
+            font-weight: 700;
+            font-size: 1.35rem;
+            letter-spacing: 0.4px;
+        }
+
+        .main-navbar .nav-link {
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 500;
+            margin-left: 10px;
+        }
+
+        .main-navbar .nav-link:hover {
+            color: #fff;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(5, 16, 27, 0.96) 0%,
+                    rgba(5, 16, 27, 0.82) 38%,
+                    rgba(5, 16, 27, 0.42) 68%,
+                    rgba(5, 16, 27, 0.14) 100%
+                ),
+                url("{% static 'img/hero-engenharia.png' %}");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 760px;
+            padding-top: 80px;
+        }
+
+        .hero-kicker {
+            color: var(--accent);
+            font-size: 0.88rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            color: #fff;
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            line-height: 0.98;
+            font-weight: 800;
+            margin-bottom: 25px;
+        }
+
+        .hero-text {
+            max-width: 650px;
+            color: rgba(255, 255, 255, 0.78);
+            font-size: 1.2rem;
+            line-height: 1.7;
+            margin-bottom: 35px;
+        }
+
+        .btn-accent {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #111;
+            font-weight: 700;
+            padding: 14px 28px;
+            border-radius: 4px;
+        }
+
+        .btn-accent:hover {
+            background: var(--accent-hover);
+            border-color: var(--accent-hover);
+            color: #111;
+        }
+
+        .btn-outline-hero {
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            color: #fff;
+            font-weight: 600;
+            padding: 14px 28px;
+            border-radius: 4px;
+        }
+
+        .btn-outline-hero:hover {
+            background: #fff;
+            color: #111;
+        }
+
+        .hero-info {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+        }
+
+        .hero-info-item {
+            border-left: 2px solid rgba(255, 255, 255, 0.25);
+            padding-left: 18px;
+        }
+
+        .hero-info-item strong {
+            display: block;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        .hero-info-item span {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.88rem;
+        }
+
+        /* SEÇÕES */
+
+        .section {
+            padding: 95px 0;
+        }
+
+        .section-light {
+            background: var(--light-bg);
+        }
+
+        .section-dark {
+            background: var(--primary-dark);
+            color: #fff;
+        }
+
+        .section-label {
+            display: block;
+            color: var(--accent);
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 750;
+            margin-bottom: 20px;
+        }
+
+        .section-description {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* MÓDULOS */
+
+        .module-card {
+            height: 100%;
+            background: #fff;
+            border: 1px solid #e7ebef;
+            border-radius: 8px;
+            padding: 30px;
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.08);
+        }
+
+        .module-icon {
+            width: 58px;
+            height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(240, 180, 41, 0.13);
+            color: #c58d0e;
+            border-radius: 8px;
+            font-size: 1.5rem;
+            margin-bottom: 22px;
+        }
+
+        .module-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .module-card p {
+            color: #6d7680;
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        /* BENEFÍCIOS */
+
+        .benefit-item {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .benefit-icon {
+            flex: 0 0 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: rgba(240, 180, 41, 0.14);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .benefit-item h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .benefit-item p {
+            color: rgba(255, 255, 255, 0.62);
+            margin: 0;
+        }
+
+        /* CTA */
+
+        .cta-box {
+            background: var(--secondary-dark);
+            border-radius: 12px;
+            padding: 55px;
+        }
+
+        .cta-box h2 {
+            font-weight: 750;
+            margin-bottom: 15px;
+        }
+
+        .cta-box p {
+            color: rgba(255, 255, 255, 0.66);
+            margin-bottom: 0;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #07111a;
+            color: rgba(255, 255, 255, 0.55);
+            padding: 28px 0;
+            font-size: 0.9rem;
+        }
+
+        footer strong {
+            color: #fff;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 768px) {
+            .hero {
+                background-position: 65% center;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-info {
+                display: none;
+            }
+
+            .section {
+                padding: 70px 0;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-box {
+                padding: 35px 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar navbar-expand-lg navbar-dark main-navbar">
+    <div class="container">
+
+        <a
+            href="{% url 'dashboard:home' %}"
+            class="navbar-brand"
+        >
+            <i class="fa-solid fa-helmet-safety me-2"></i>
+            ERP Engenharia
+        </a>
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div
+            class="collapse navbar-collapse"
+            id="mainNavbar"
+        >
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        href="#plataforma"
+                    >
+                        Plataforma
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        href="#modulos"
+                    >
+                        Módulos
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        href="#beneficios"
+                    >
+                        Benefícios
+                    </a>
+                </li>
+
+                <li class="nav-item ms-lg-3">
+
+                    <a
+                        href="{% url 'dashboard:dashboard' %}"
+                        class="btn btn-accent"
+                    >
+                        Acessar sistema
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="container">
+
+        <div class="hero-content">
+
+            <div class="hero-kicker">
+                Gestão integrada para engenharia
+            </div>
+
+            <h1 class="hero-title">
+                Controle completo das suas obras.
+            </h1>
+
+            <p class="hero-text">
+                Planeje, acompanhe e administre obras, contratos,
+                medições, equipes, documentos, suprimentos e custos
+                em uma única plataforma.
+            </p>
+
+            <div class="d-flex flex-wrap gap-3">
+
+                <a
+                    href="{% url 'dashboard:dashboard' %}"
+                    class="btn btn-accent"
+                >
+                    <i class="fa-solid fa-arrow-right-to-bracket me-2"></i>
+                    Entrar no ERP
+                </a>
+
+                <a
+                    href="#plataforma"
+                    class="btn btn-outline-hero"
+                >
+                    Conhecer a plataforma
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-info">
+
+        <div class="container">
+
+            <div class="row gy-4">
+
+                <div class="col-md-3">
+                    <div class="hero-info-item">
+                        <strong>Obras</strong>
+                        <span>Planejamento e acompanhamento</span>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="hero-info-item">
+                        <strong>Medições</strong>
+                        <span>Evolução física e financeira</span>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="hero-info-item">
+                        <strong>Custos</strong>
+                        <span>Controle financeiro centralizado</span>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="hero-info-item">
+                        <strong>Documentos</strong>
+                        <span>Informações organizadas</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SOBRE -->
+
+<section
+    id="plataforma"
+    class="section"
+>
+
+    <div class="container">
+
+        <div class="row align-items-center g-5">
+
+            <div class="col-lg-6">
+
+                <span class="section-label">
+                    ERP Engenharia
+                </span>
+
+                <h2 class="section-title">
+                    Informação centralizada para decisões melhores.
+                </h2>
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <p class="section-description">
+                    O ERP Engenharia foi pensado para centralizar
+                    as principais atividades relacionadas à gestão
+                    de obras e processos administrativos.
+                </p>
+
+                <p class="section-description mb-0">
+                    A plataforma conecta planejamento, execução,
+                    contratos, suprimentos, equipes, documentação
+                    e informações financeiras em um único ambiente.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- MÓDULOS -->
+
+<section
+    id="modulos"
+    class="section section-light"
+>
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <span class="section-label">
+                Módulos
+            </span>
+
+            <h2 class="section-title">
+                Uma plataforma modular.
+            </h2>
+
+            <p class="section-description mx-auto" style="max-width: 700px;">
+                Os módulos funcionam de forma integrada,
+                permitindo ampliar o ERP conforme as necessidades
+                da organização.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="module-card">
+
+                    <div class="module-icon">
+                        <i class="fa-solid fa-helmet-safety"></i>
+                    </div>
+
+                    <h3>Gestão de Obras</h3>
+
+                    <p>
+                        Cadastro, planejamento, etapas,
+                        cronogramas e acompanhamento da execução.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="module-card">
+
+                    <div class="module-icon">
+                        <i class="fa-solid fa-ruler-combined"></i>
+                    </div>
+
+                    <h3>Medições</h3>
+
+                    <p>
+                        Controle do avanço físico e financeiro
+                        das obras e serviços executados.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="module-card">
+
+                    <div class="module-icon">
+                        <i class="fa-solid fa-file-signature"></i>
+                    </div>
+
+                    <h3>Contratos</h3>
+
+                    <p>
+                        Gestão de contratos, vigências,
+                        aditivos e documentos relacionados.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="module-card">
+
+                    <div class="module-icon">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </div>
+
+                    <h3>Compras e Suprimentos</h3>
+
+                    <p>
+                        Solicitações, fornecedores,
+                        cotações e acompanhamento de compras.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="module-card">
+
+                    <div class="module-icon">
+                        <i class="fa-solid fa-coins"></i>
+                    </div>
+
+                    <h3>Financeiro</h3>
+
+                    <p>
+                        Custos, centros de custo,
+                        pagamentos e acompanhamento financeiro.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="module-card">
+
+                    <div class="module-icon">
+                        <i class="fa-solid fa-folder-open"></i>
+                    </div>
+
+                    <h3>Documentos</h3>
+
+                    <p>
+                        Projetos, plantas, relatórios,
+                        contratos e arquivos centralizados.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- BENEFÍCIOS -->
+
+<section
+    id="beneficios"
+    class="section section-dark"
+>
+
+    <div class="container">
+
+        <div class="row g-5 align-items-center">
+
+            <div class="col-lg-5">
+
+                <span class="section-label">
+                    Gestão integrada
+                </span>
+
+                <h2 class="section-title">
+                    Menos informação dispersa.
+                    Mais controle.
+                </h2>
+
+                <p style="color: rgba(255,255,255,.62); line-height: 1.8;">
+                    Dados estruturados e processos integrados
+                    permitem acompanhar a situação das obras
+                    com maior clareza.
+                </p>
+
+            </div>
+
+
+            <div class="col-lg-7">
+
+                <div class="benefit-item">
+
+                    <div class="benefit-icon">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+
+                    <div>
+                        <h4>Visão gerencial</h4>
+                        <p>
+                            Indicadores consolidados para acompanhamento
+                            dos principais resultados.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="benefit-item">
+
+                    <div class="benefit-icon">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+
+                    <div>
+                        <h4>Centralização de dados</h4>
+                        <p>
+                            Informações de diferentes áreas
+                            organizadas em um único sistema.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="benefit-item">
+
+                    <div class="benefit-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+
+                    <div>
+                        <h4>Controle e rastreabilidade</h4>
+                        <p>
+                            Registros estruturados e histórico
+                            das principais operações.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="benefit-item mb-0">
+
+                    <div class="benefit-icon">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+
+                    <div>
+                        <h4>Arquitetura modular</h4>
+                        <p>
+                            Novas funcionalidades podem ser incorporadas
+                            conforme o ERP evolui.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CTA -->
+
+<section class="section section-dark pt-0">
+
+    <div class="container">
+
+        <div class="cta-box">
+
+            <div class="row align-items-center g-4">
+
+                <div class="col-lg-8">
+
+                    <h2>
+                        Acesse a plataforma.
+                    </h2>
+
+                    <p>
+                        Entre no ambiente administrativo
+                        e acompanhe as informações do ERP.
+                    </p>
+
+                </div>
+
+                <div class="col-lg-4 text-lg-end">
+
+                    <a
+                        href="{% url 'dashboard:dashboard' %}"
+                        class="btn btn-accent"
+                    >
+                        Acessar ERP
+                        <i class="fa-solid fa-arrow-right ms-2"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-md-6">
+
+                <strong>
+                    ERP Engenharia
+                </strong>
+
+            </div>
+
+            <div class="col-md-6 text-md-end">
+
+                Gestão integrada de obras e processos administrativos.
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+></script>
+
+</body>
+</html>
